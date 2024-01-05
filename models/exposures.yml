@@ -1,0 +1,21 @@
+version: 2
+
+exposures:
+
+  - name: acceptance_business_report
+    label: Acceptance Business Report
+    type: dashboard
+    maturity: high
+    url: ""
+    description: >
+      Acceptance report presented to the board of directors to present points such as:
+      - Total volume of declined payments in USD
+      - Root cause analysis of movements in the acceptance rate
+      - Propose solutions and recomendations to solve the decline in the acceptance rate
+
+    depends_on:
+      - ref('mrt_transactions')
+
+    owner:
+      name: Juliano Garcia
+      email: juliano.garcia@protonmail.com
