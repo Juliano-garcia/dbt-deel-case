@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: globepay_reports
+    database: dev-jgarcia-deel-case
+    schema: globepay  
+    tables:
+      - name: acceptance_report
+      - name: chargeback_report
