@@ -1,6 +1,6 @@
 WITH
 
-transactions as ( SELECT * FROM {{ ref('int_transactions') }} )
+transactions as ( SELECT * FROM {{ ref('mrt_transactions') }} )
 
 SELECT
     DATE(date_time) as date

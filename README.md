@@ -14,10 +14,12 @@ There was the possibility to create them as seeds in dbt however it is usually n
 Both table were upload with all columns as STRING type, so that it'll enable me more liberty when casting dtypes and manipulating as per the specific analytics needs.
 
 ## 2. Manipulation
-For this project I've specified 3 specific layers:
+For this project I've specified 3 layers:
 1. **Staging**: Used to tabularize, cast types and remove any duplicated records from the raw source tables. No business rules or agregation logic should happen in this layer.
 2. **Intermediate**: Used to consolidate business specific logics that might be used to multiple consumption purposes later on. For example, currency standardization from local to USD.
-3. **Mart**: Here we have th final consumption models. I've choosen to go for an apporah of OBTs (One Big Table), whhere we have all the required values and dimentions for a specific analysis or product already persisted in the final table, thus optimizing query performance (avoiding multiple JOINs like a snowflake modeling).
+3. **Mart**: Here we have th final consumption models. I've choosen to go for an apporah of OBTs (One Big Table), whhere we have all the required values and dimentions for a specific analysis or product already persisted in the final table, thus optimizing query performance (avoiding multiple JOINs like a snowflake modeling), making sure to include all the required business logics and transaformations.
+
+For this case, since it only had 2 simple tables as sources and their transaformation were simple anought, I've simplified the dbt project to accomodate only 2 layers, therefore "merging" the intermadiate and mart layers.
 
 ### Assumptions
 - No duplicated records were found in the Acceptance Report, based on the field `ref`, therefore its staging model will remains as a view given that it simply handles data typing.
