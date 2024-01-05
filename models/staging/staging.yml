@@ -1,0 +1,58 @@
+models:
+  - name: stg_acceptance_report
+    description: The 'stg_acceptance_report' dbt model is used to transform and
+      prepare data from the 'acceptance_report' table in the 'globepay' schema.
+      It casts the 'status' column as a boolean, parses the 'date_time' column
+      into a datetime format, and casts the 'cvv_provided' column as a boolean.
+      It also casts the 'amount' column as a float64 data type. The model
+      extracts the 'external_ref', 'status', 'source', 'ref', 'date_time',
+      'state', 'cvv_provided', 'amount', 'country', 'currency', and 'rates'
+      columns from the raw table and returns them as the final output.
+    config:
+      meta:
+        owner: juliano.garcia
+    columns:
+      - name: external_ref
+        description: Hashed external reference
+      - name: status
+        description: Status of the transaction, TRUE for valid
+      - name: source
+        description: "Source of the transaction. Ex.: Globepay"
+      - name: ref
+        description: Unique identifier of the transaction
+        tests:
+          - unique
+          - not_null
+      - name: date_time
+        description: Timestamp of the transaction
+      - name: state
+        description: Either `ACCEPTED` or `DECLINED`
+      - name: cvv_provided
+        description: Wether or not the credit card CVV were provided
+      - name: amount
+        description: Total amount of the transaction
+      - name: country
+        description: Country of the transaction
+      - name: currency
+        description: Currency of the transaction
+      - name: rates
+        description: JSON containing the applicable conversion rates for that transaction
+  - name: stg_chargeback_report
+    description: The 'stg_chargeback_report' dbt model is used to transform and
+      prepare the raw data from the 'chargeback_report' table in the 'globepay'
+      schema of the 'dev-jgarcia-deel-case' database. The model casts the
+      'status' and 'chargeback' columns to boolean values and renames the
+      'external_ref' and 'source' columns. The final output includes the
+      transformed data with the renamed columns.
+    config:
+      meta:
+        owner: juliano.garcia
+    columns:
+      - name: external_ref
+        description: Hashed external refrence of the transaction
+      - name: status
+        description: Status of the transaction, TRUE for valid
+      - name: source
+        description: "Source of chargeback. Ex: Globepay"
+      - name: chargeback
+        description: Status of chargeback, TRUE if it was chargedback

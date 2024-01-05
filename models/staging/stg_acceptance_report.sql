@@ -21,7 +21,7 @@ raw_table as ( SELECT * FROM {{ source('globepay_reports','acceptance_report') }
         , CAST(amount as FLOAT64) as amount
         , country
         , currency
-        , PARSE_JSON(rates) as rates
+        , PARSE_JSON(rates, wide_number_mode=>'round') as rates
     FROM
         raw_table
 
