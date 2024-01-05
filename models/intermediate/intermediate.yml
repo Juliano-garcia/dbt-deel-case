@@ -1,0 +1,49 @@
+models:
+  - name: int_transactions
+    config:
+      meta:
+        owner: juliano.garcia
+    description: The 'int_transactions' dbt model combines data from the
+      'stg_acceptance_report' and 'stg_chargeback_report' tables in the
+      'globepay' schema to create a unified view of international transactions.
+      It includes information such as the external reference, status, source,
+      reference, date and time, state, chargeback status, CVV provided
+      indicator, country, currency, amount in local currency, and amount in USD.
+      This model is useful for analyzing and monitoring international
+      transaction activity and identifying potential chargebacks.
+    columns:
+      - name: external_ref
+        description: The unique identifier for each transaction. This column is crucial
+          for tracking and identifying individual transactions. It can be used
+          to join or link this table with other tables in the database. Data
+          analysts can utilize this column to analyze transaction patterns,
+          identify trends, and perform transaction-level analysis.
+        tests:
+          - unique
+          - not_null
+      - name: status
+        description: The current status of the transaction
+      - name: source
+        description: "Source of the transaction. Ex.: Globepay"
+      - name: ref
+        description: Unique identifier of the transaction
+      - name: date_time
+        description: Timestamp of the transaction
+      - name: state
+        description: Either `ACCEPTED` or `DECLINED`
+      - name: chargeback
+        description: Status of chargeback, TRUE if it was chargedback
+      - name: cvv_provided
+        description: Wether or not the credit card CVV were provided
+      - name: country
+        description: Country of the transaction
+      - name: currency
+        description: Currency of the transaction
+      - name: amount_local_currency
+        description: The monetary value of the transaction in the local currency, useful
+          for analyzing transaction volume and value in different currencies.
+      - name: amount_usd
+        description: The amount in USD currency. This column is useful for performing
+          analysis and reporting in a standardized currency. It allows for easy
+          comparison of transaction amounts across different currencies and
+          provides a common baseline for financial analysis.
