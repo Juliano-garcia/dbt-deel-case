@@ -6,7 +6,7 @@ exposures:
     label: Acceptance Business Report
     type: dashboard
     maturity: high
-    url: ""
+    url: https://lookerstudio.google.com/reporting/912ce5d0-13a3-4c61-8580-0990756b7b72
     description: >
       Acceptance report presented to the board of directors to present points such as:
       - Total volume of declined payments in USD
