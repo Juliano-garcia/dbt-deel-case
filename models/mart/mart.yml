@@ -1,5 +1,5 @@
 models:
-  - name: int_transactions
+  - name: mrt_transactions
     config:
       meta:
         owner: juliano.garcia
